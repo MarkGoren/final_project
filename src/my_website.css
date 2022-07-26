@@ -1,0 +1,263 @@
+body{
+    font-family: 'Raleway', sans-serif;
+    position: relative;
+}
+
+#website_logo{
+    height: auto;
+    width: 250px;
+    cursor: default;
+}
+
+#search_bar{
+    width: 350px;
+    height: 50px;
+    padding: 0 20px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 0;
+    border-width: 1px;
+    margin-right: 20px;
+
+    font-size: x-large;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+
+    box-shadow: -3px 3px 2px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: -3px 3px 2px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -3px 3px 2px 0px rgba(0,0,0,0.75);
+}
+
+#search_bar:focus{
+    outline: none !important;
+    font-weight: 500;
+}
+
+#search_button{
+    position: relative;
+    right: 70px;
+    font-size: xx-large;
+    height: 50px;
+    width: 50px;
+    
+    text-align: center;
+    line-height: 50px;
+    cursor:default;
+}
+
+/* #search_button:hover{
+    color: rgb(88, 87, 87);
+    cursor: pointer;
+}
+
+#search_button:active{
+    color: black;
+} */
+
+#search_bar_div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    right: 25px;
+}
+
+#login_button, #signup_button, #submitButton{
+    border-radius: 0;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    height: 35px;
+    width: 70px;
+    text-align: center;
+    line-height: 35px;
+    margin-left: 22px;
+    font-weight: 300;
+    background-color: white;
+    color: black;
+    box-shadow: -3px 3px 2px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: -3px 3px 2px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -3px 3px 2px 0px rgba(0,0,0,0.75);
+}
+
+#login_button:hover, #signup_button:hover, #submitButton:hover{
+    cursor: pointer;
+    box-shadow: -0.5px 1px 3px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: -0.5px 1px 3px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -0.5px 1px 3px 0px rgba(0,0,0,0.75);
+}
+
+#login_button:active, #signup_button:active{
+    border-width: 3px
+}
+
+#favorites_button, #shopping_list_button{
+    margin-left: 30px;
+    font-size: 40px;
+    position: relative;
+    left: 30px;
+}
+
+#favorites_button:hover, #shopping_list_button:hover{
+    color: rgb(69, 69, 69);
+    cursor: pointer;
+}
+
+#favorites_button:active, #shopping_list_button:active{
+    color: black;
+}
+
+#categories_line{
+    width: 100%;
+    size: 4px;
+    margin-top: 0;
+}
+
+#categories_section_container{
+    margin-top: 20px;
+}
+
+#categories_buttons_div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#categories_buttons_div >*{
+    margin: 0 33px;
+    font-size: larger;
+}
+
+#history_button, #info_button, #help_button{
+    font-size: 26.5px;
+}
+
+#categories_buttons_div>*:hover{
+    cursor: pointer;
+    color: rgb(69, 69, 69);
+}
+
+#categories_buttons_div>*:active{
+    color: rgb(0, 0, 0);
+}
+
+main{
+    padding-top: 20px;
+    padding-bottom: 120px;
+}
+
+div.container{
+    font-family: 'Raleway', sans-serif;
+}
+
+p.card-text:first-child{
+    font-size: xx-large;
+    margin-bottom: 0;
+}
+
+div.card{
+    font-size: larger;
+    border-style: none;
+    margin: 1.5rem;
+}
+
+.card-text:first-child:hover{
+    cursor: pointer;
+    color: rgb(69, 69, 69);
+}
+
+.card-text:first-child:active{
+    color: black;
+}
+
+/* div.card:nth-child(n+4){
+    margin-top: 40px;
+} */
+
+div.card-body{
+    padding: 0;
+}
+
+img.card-img-top{
+    border-radius: 0;
+    width: 18rem;
+    height: 18rem;
+}
+
+footer{
+    /* position: absolute;
+    bottom: 0;
+    width: 100%;
+    
+    left: 0px;
+     */
+
+    text-align: center;
+    /* margin-top: 1rem;
+    padding: 1rem 0 0 0; */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+}
+
+#footer_container{
+    background-color: black;
+    color: white;
+    height: 100px;
+    line-height: 50px;
+}
+
+#inst_button, #face_button{
+    margin: 0 10px;
+}
+
+#inst_button:hover, #face_button:hover{
+    cursor: pointer;
+}
+
+#img-container{
+    display: flex;
+}
+
+#like_button{
+    position: relative;
+    right: 35px;
+    top: 5px;
+}
+
+#like_button_icon{
+    font-size: 30px;
+}
+
+#like_button_icon:hover{
+    cursor: pointer;
+}
+
+nav{
+    font-family: 'Raleway', sans-serif;
+}
+#first_nav_item_list >*{
+    margin: 10px 0;
+}
+
+#second_nav_item_list >*{
+    margin-left: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+#nav-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 90px;
+}
+
+#my-tabs{
+    color: black !important;
+}
+
+#my-tab{
+    color: black !important;
+}
