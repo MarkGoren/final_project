@@ -1,13 +1,37 @@
-
+// Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
+// Bootstrap Bundle JS
+import "bootstrap/dist/js/bootstrap.bundle.min";
 import './App.css';
+import React, { useState } from "react";
 import MyNavbar from "./common/myNavbar";
 import MyFooter from './common/myFooter';
 import './my_website.css'
 import { Container, Tab, Tabs } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import ProductCard from './common/productCards';
+import productsData from "./data/productsData.js"
+import ProductDetails from './common/productDetails';
 
 function App() {
+
+  const [myProductsData, setMyProductsData] = useState(productsData)
+    const [showProduct, setShowProduct] = useState(false)
+    const [specificProd, setSpecificProd] = useState('')
+    
+
+    function handleProductClicked(e, category){
+        setShowProduct(true)
+        
+        setSpecificProd(myProductsData[category][e.target.id -1])
+        
+    }
+
+    function handleProductClose(){
+        setShowProduct(false)
+    }
+
   return (
     <>
       <MyNavbar></MyNavbar>
@@ -17,29 +41,50 @@ function App() {
                 id="my-tabs"
                 className="mb-3"
                 justify
-                
+                onClick={handleProductClose}
                 >
                 <Tab eventKey="tshirts" title={<span style={{color: 'black'}}>Tshirts</span>} id='myTab'>
                     <Container style={{padding: '1.5rem 0 100% 0'}}>
+                        {!showProduct ?
+                        (<div className="row align-items-center justify-content-center">
+                            {myProductsData.tshirts.map(product => <ProductCard onClick={e => handleProductClicked(e, 'tshirts')} key={product.id} id={product.id} productImgSrc={product.productImgSrc} productName={product.productName} productCost={product.productCost}></ProductCard>)}
+                        </div>) : null
+                        }
                         
+                        {showProduct ? (<ProductDetails onClick={handleProductClose} key={specificProd.id} productImgSrc={specificProd.productImgSrc} productName={specificProd.productName} productCost={specificProd.productCost} productColors={specificProd.productColors} productSizes={specificProd.productSizes} productAmounts={specificProd.productAmounts}></ProductDetails>) : null}
                     </Container>
                 </Tab>
 
                 <Tab eventKey="hoodies" title={<span style={{color: 'black'}}>Hoodies</span>}>
                     <Container style={{padding: '1.5rem 0 100% 0'}}>
-                        
+                        {!showProduct ?
+                        (<div className="row align-items-center justify-content-center">
+                            {myProductsData.hoodies.map(product => <ProductCard onClick={e => handleProductClicked(e, 'hoodies')} key={product.id} id={product.id} productImgSrc={product.productImgSrc} productName={product.productName} productCost={product.productCost}></ProductCard>)}
+                        </div>) : null
+                        }
+                        {showProduct ? (<ProductDetails onClick={handleProductClose} key={specificProd.id} productImgSrc={specificProd.productImgSrc} productName={specificProd.productName} productCost={specificProd.productCost} productColors={specificProd.productColors} productSizes={specificProd.productSizes} productAmounts={specificProd.productAmounts}></ProductDetails>) : null}
                     </Container>
                 </Tab>
 
                 <Tab eventKey="pants" title={<span style={{color: 'black'}}>Pants</span>}>
                     <Container style={{padding: '1.5rem 0 100% 0'}}>
-                        
+                        {!showProduct ?
+                        (<div className="row align-items-center justify-content-center">
+                            {myProductsData.pants.map(product => <ProductCard onClick={e => handleProductClicked(e, 'pants')} key={product.id} id={product.id} productImgSrc={product.productImgSrc} productName={product.productName} productCost={product.productCost}></ProductCard>)}
+                        </div>) : null
+                        }
+                        {showProduct ? (<ProductDetails onClick={handleProductClose} key={specificProd.id} productImgSrc={specificProd.productImgSrc} productName={specificProd.productName} productCost={specificProd.productCost} productColors={specificProd.productColors} productSizes={specificProd.productSizes} productAmounts={specificProd.productAmounts}></ProductDetails>) : null}
                     </Container>
                 </Tab>
 
                 <Tab eventKey="socks" title={<span style={{color: 'black'}}>Socks</span>}>
                     <Container style={{padding: '1.5rem 0 100% 0'}}>
-                        
+                        {!showProduct ?
+                        (<div className="row align-items-center justify-content-center">
+                            {myProductsData.socks.map(product => <ProductCard onClick={e => handleProductClicked(e, 'socks')} key={product.id} id={product.id} productImgSrc={product.productImgSrc} productName={product.productName} productCost={product.productCost}></ProductCard>)}
+                        </div>) : null
+                        }
+                        {showProduct ? (<ProductDetails onClick={handleProductClose} key={specificProd.id} productImgSrc={specificProd.productImgSrc} productName={specificProd.productName} productCost={specificProd.productCost} productColors={specificProd.productColors} productSizes={specificProd.productSizes} productAmounts={specificProd.productAmounts}></ProductDetails>) : null}
                     </Container>
                 </Tab>
 
