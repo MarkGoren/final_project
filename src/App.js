@@ -30,6 +30,13 @@ function App() {
 
   function handleProductClose() {
     setShowProduct(false);
+
+    let categories = ['color', 'size']
+    for (let i = 0; i < categories.length; i++) {
+      inputsValidations[categories[i]].errors.length = 0
+      inputsValidations[categories[i]].value = ''
+    }
+    setInputsValidations({ ...inputsValidations });
   }
 
   const [showLogin, setShowLogin] = useState(false);
@@ -39,10 +46,18 @@ function App() {
 
   const [showSignup, setShowSignup] = useState(false);
 
-  const handleCloseSignup = () => setShowSignup(false);
+  const handleCloseSignup = () => {
+    setShowSignup(false);
+    let inputs = ['username', 'email', 'password', 'passwordRepeat']
+    for (let i = 0; i < inputs.length; i++) {
+      inputsValidations[inputs[i]].errors.length = 0
+      inputsValidations[inputs[i]].value = ''
+    }
+    setInputsValidations({ ...inputsValidations });
+  }
   const handleShowSignup = () => setShowSignup(true);
 
-  const [signupForm, setSignupForm] = useState({
+  const [inputsValidations, setInputsValidations] = useState({
     username: {
       value: "",
       validations: {
@@ -75,19 +90,33 @@ function App() {
       },
       errors: [],
     },
+    size: {
+      value: '',
+      validations: {
+        required: true
+      },
+      errors: []
+    },
+    color: {
+      value: '',
+      validations: {
+        required: true
+      },
+      errors: []
+    }
   });
 
   const validateInput = (e) => {
     let { name, value } = e.target;
 
-    signupForm.passwordRepeat.validations.repeat = signupForm.password.value;
+    inputsValidations.passwordRepeat.validations.repeat = inputsValidations.password.value;
 
-    signupForm[name].value = value;
-    signupForm[name].errors.length = 0;
-    signupForm[name].errors.push(
-      ...validate(name, value, signupForm[name].validations)
+    inputsValidations[name].value = value;
+    inputsValidations[name].errors.length = 0;
+    inputsValidations[name].errors.push(
+      ...validate(name, value, inputsValidations[name].validations)
     );
-    setSignupForm({ ...signupForm });
+    setInputsValidations({ ...inputsValidations });
   };
 
   const handleSubmit = (e) => {
@@ -102,20 +131,48 @@ function App() {
       .filter((elem) => elem.name);
 
     for (let i = 0; i < data.length; i++) {
-      signupForm[data[i].name][data[i].value] = data[i].value;
+      inputsValidations[data[i].name][data[i].value] = data[i].value;
     }
 
     for (let i = 0; i < data.length; i++) {
-      signupForm[data[i].name].errors.push(
-        ...validate(
-          data[i].name,
-          signupForm[data[i].name].value,
-          signupForm[data[i].name].validations
-        )
-      );
+      if(inputsValidations[data[i].name].errors.length < 1){
+        inputsValidations[data[i].name].errors.push(
+          ...validate(
+            data[i].name,
+            inputsValidations[data[i].name].value,
+            inputsValidations[data[i].name].validations
+          )
+        );
+      }
     }
-    setSignupForm({ ...signupForm });
+    setInputsValidations({ ...inputsValidations });
   };
+
+  const handleProductSubmit = (e) => {
+    e.preventDefault();
+
+    let categories = ['color', 'size']
+
+    let data = [...e.currentTarget.elements];
+    data = data.filter((input) => input.checked)
+
+    for (let i = 0; i < data.length; i++) {
+      inputsValidations[data[i].name].value = data[i].defaultValue;
+    }
+
+    for (let i = 0; i < categories.length; i++) {
+      if(inputsValidations[categories[i]].errors.length < 1){
+        inputsValidations[categories[i]].errors.push(
+          ...validate(
+            categories[i],
+            inputsValidations[categories[i]].value,
+            inputsValidations[categories[i]].validations
+          )
+        );
+      }
+    }
+    setInputsValidations({ ...inputsValidations });
+  }
 
   return (
     <>
@@ -155,7 +212,10 @@ function App() {
                 productCost={specificProd.productCost}
                 productColors={specificProd.productColors}
                 productSizes={specificProd.productSizes}
-                productAmounts={specificProd.productAmounts}
+                colorErrors={inputsValidations.color.errors}
+                sizeErrors={inputsValidations.size.errors}
+                handleProductSubmit={handleProductSubmit}
+                validateInput={validateInput}
               ></ProductDetails>
             ) : null}
           </Container>
@@ -189,7 +249,10 @@ function App() {
                 productCost={specificProd.productCost}
                 productColors={specificProd.productColors}
                 productSizes={specificProd.productSizes}
-                productAmounts={specificProd.productAmounts}
+                colorErrors={inputsValidations.color.errors}
+                sizeErrors={inputsValidations.size.errors}
+                handleProductSubmit={handleProductSubmit}
+                validateInput={validateInput}
               ></ProductDetails>
             ) : null}
           </Container>
@@ -223,7 +286,10 @@ function App() {
                 productCost={specificProd.productCost}
                 productColors={specificProd.productColors}
                 productSizes={specificProd.productSizes}
-                productAmounts={specificProd.productAmounts}
+                colorErrors={inputsValidations.color.errors}
+                sizeErrors={inputsValidations.size.errors}
+                handleProductSubmit={handleProductSubmit}
+                validateInput={validateInput}
               ></ProductDetails>
             ) : null}
           </Container>
@@ -257,7 +323,10 @@ function App() {
                 productCost={specificProd.productCost}
                 productColors={specificProd.productColors}
                 productSizes={specificProd.productSizes}
-                productAmounts={specificProd.productAmounts}
+                colorErrors={inputsValidations.color.errors}
+                sizeErrors={inputsValidations.size.errors}
+                handleProductSubmit={handleProductSubmit}
+                validateInput={validateInput}
               ></ProductDetails>
             ) : null}
           </Container>
@@ -390,14 +459,14 @@ function App() {
         handleShowLogin={handleShowLogin}
         handleSubmit={handleSubmit}
         validateInput={validateInput}
-        emailValue={signupForm.email.value}
-        emailErrors={signupForm.email.errors}
-        usernameValue={signupForm.username.value}
-        usernameErrors={signupForm.username.errors}
-        passwordValue={signupForm.password.value}
-        passwordErrors={signupForm.password.errors}
-        passwordRepeatValue={signupForm.passwordRepeat.value}
-        passwordRepeatErrors={signupForm.passwordRepeat.errors}
+        emailValue={inputsValidations.email.value}
+        emailErrors={inputsValidations.email.errors}
+        usernameValue={inputsValidations.username.value}
+        usernameErrors={inputsValidations.username.errors}
+        passwordValue={inputsValidations.password.value}
+        passwordErrors={inputsValidations.password.errors}
+        passwordRepeatValue={inputsValidations.passwordRepeat.value}
+        passwordRepeatErrors={inputsValidations.passwordRepeat.errors}
       ></MySignup>
 
       <MyFooter></MyFooter>
