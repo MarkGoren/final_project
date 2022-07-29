@@ -13,6 +13,7 @@ export default function MySignup(props) {
       <Modal.Header style={{ paddingRight: "1.5rem" }} closeButton>
         <Modal.Title>SignUp</Modal.Title>
       </Modal.Header>
+      
       <Modal.Body>
         <Form onSubmit={props.handleSubmit}>
           <InputGroup
